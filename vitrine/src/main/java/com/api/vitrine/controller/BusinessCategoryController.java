@@ -24,6 +24,7 @@ public class BusinessCategoryController {
 
     @GetMapping(path = "/all")
     public ResponseEntity<List<BusinessCategory>> listAll(){
+
         return ResponseEntity.status(HttpStatus.OK).body(businessCategoryService.findAll());
     }
 

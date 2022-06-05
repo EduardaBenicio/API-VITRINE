@@ -1,9 +1,12 @@
 package com.api.vitrine.model;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 //ANNOTATION LOMBOK
@@ -17,6 +20,9 @@ import java.util.List;
 //ANNOTATION JPA
 @Entity
 @Table(name = "product")
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id")
 public class Product {
 
     @Id
@@ -46,22 +52,22 @@ public class Product {
 
     @JsonIgnore
     @ManyToMany(mappedBy = "products")
-    private List<Request> request;
+    private List<Request> request = new ArrayList<>();
 
-    @JsonIgnore
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "product")
-    private List<ProductPhotos> productPhotos;
+    private List<ProductPhotos> productPhotos = new ArrayList<>();
 
     @JsonIgnore
     @ManyToMany(mappedBy = "favoritesProducts")
-    private List<Client> clients;
+    private List<Client> clients = new ArrayList<>();
 
     @JsonIgnore
     @ManyToMany(mappedBy = "cartProducts")
-    private List<ShoppingCart> shoppingCarts;
+    private List<ShoppingCart> shoppingCarts = new ArrayList<>();
 
-    @JsonIgnore
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "product")
-    private List<Specifications> specifications;
+    private List<Specifications> specifications =  new ArrayList<>();
 
 }

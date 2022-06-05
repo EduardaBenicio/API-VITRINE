@@ -1,5 +1,7 @@
 package com.api.vitrine.model;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.*;
 
 import javax.persistence.*;
@@ -15,6 +17,9 @@ import javax.persistence.*;
 //ANNOTATION JPA
 @Entity
 @Table(name = "specification")
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id")
 public class Specifications {
 
     @Id

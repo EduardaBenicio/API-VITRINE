@@ -10,44 +10,38 @@ import javax.persistence.*;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@RequiredArgsConstructor
+//@RequiredArgsConstructor
 @Builder
 
 //ANNOTATION JPA
-@Entity
-@Table(name = "address_store")
+
+@Embeddable
 public class AddressStore {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_address_store")
-    private long id;
 
-    @NonNull
+    //@NonNull
     @Column(name = "street")
     private String street;
 
-    @NonNull
+    //@NonNull
     @Column(name = "district")
     private String district;
 
-    @NonNull
+    //@NonNull
     @Column(name = "cep")
     private String cep;
 
-    @NonNull
+    //NonNull
     @Column(name = "number")
     private String number;
 
-    @NonNull
+    ///@NonNull
     @Column(name = "complement")
     private String complement;
 
-    @NonNull
+    //@NonNull
     @Column(name = "uf")
     private String uf;
-
-
 
 
 }

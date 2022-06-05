@@ -1,10 +1,13 @@
 package com.api.vitrine.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 //ANNOTATION LOMBOK
@@ -16,6 +19,9 @@ import java.util.List;
 //ANNOTATION JPA
 @Entity
 @Table(name = "shopping_cart")
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id")
 public class ShoppingCart {
 
     @Id
@@ -27,11 +33,11 @@ public class ShoppingCart {
     @Column(name = "number")
     private double total;
 
-    @JsonIgnore
+
     @ManyToMany
     @JoinTable(name="cart_produtos",
             joinColumns=@JoinColumn(name="id_shopping_cart"),
             inverseJoinColumns = @JoinColumn(name = "id_product"))
-    private List<Product> cartProducts;
+    private List<Product> cartProducts = new ArrayList<>();
 
 }

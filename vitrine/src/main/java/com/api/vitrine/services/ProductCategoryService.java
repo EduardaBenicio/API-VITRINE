@@ -1,10 +1,13 @@
 package com.api.vitrine.services;
 
 import com.api.vitrine.model.ProductCategory;
+import com.api.vitrine.model.Store;
 import com.api.vitrine.repository.ProductCategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 @Service
@@ -14,8 +17,17 @@ public class ProductCategoryService {
     ProductCategoryRepository productCategoryRepository;
 
     public List<ProductCategory> findAll(long id){
+        List<ProductCategory> categories = new ArrayList<>();
+        ProductCategory productCategory = null;
+        if(productCategoryRepository.findByStore(id) != null){
+            for(int i = 0; i < productCategoryRepository.findByStore(id).size(); i++){
+                productCategory = productCategoryRepository.findByStore(id).get(i);
+                productCategory.setStore(null);
+                categories.add(productCategory);
+            }
+        }
 
-        return productCategoryRepository.findByStore(id);
+        return categories;
     }
 
     public ProductCategory save(ProductCategory productCategory){

@@ -1,9 +1,12 @@
 package com.api.vitrine.model;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -12,12 +15,14 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@RequiredArgsConstructor
 @Builder
 
 //ANNOTATION JPA
 @Entity
 @Table(name = "store_owner")
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id")
 public class StoreOwner {
 
     @Id
@@ -25,33 +30,37 @@ public class StoreOwner {
     @Column(name = "id_store_owner")
     private long id;
 
-    @NonNull
+    //@NonNull
     @Column(name = "name_owner", nullable = false)
     private String name;
 
-    @NonNull
+    //@NonNull
+    @Column(name = "email_owner", nullable = false)
+    private String email;
+
+    //@NonNull
     @Column(name = "phone1", nullable = false)
     private String phone1;
 
-    @NonNull
+    //@NonNull
     @Column(name = "phone2")
     private String phone2;
 
-    @NonNull
-    @Column(name = "birth_date")
+   // @NonNull
+    @Column(name = "birth_date", nullable = false)
     private String birthDate;
 
-    @NonNull
+    //@NonNull
     @Column(name = "profile_picture")
     private String profilePicture;
 
-    @NonNull
+    //@NonNull
     @Column(name = "cpf", unique=true, nullable = false)
     private String cpf;
 
-    @JsonIgnore
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "storeOwner")
-    private List<Store> stores;
+    private List<Store> stores = new ArrayList<>();
 
     @OneToOne
     @JoinColumn(name = "id_user")

@@ -5,6 +5,7 @@ import com.api.vitrine.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -13,8 +14,19 @@ public class ProductService {
     ProductRepository productRepository;
 
     public List<Product> findAll(){
+        List<Product> products = new ArrayList<>();
+        Product product = null;
+        if(productRepository.findAll() != null){
 
-        return productRepository.findAll();
+            for(int i = 0; i < productRepository.findAll().size(); i++){
+                product =  productRepository.findAll().get(i);
+                product.getProductCategory().setStore(null);
+                product.getProductCategory().setProducts(null);
+                products.add(product);
+
+            }
+        }
+        return products;
     }
 
     public Product save(Product product){
@@ -28,9 +40,20 @@ public class ProductService {
     }
 
     public List<Product> findByCategory(Long id){
-        List<Product> produtos = productRepository.findByProductCategory(id);
-        if(produtos != null){
-            return produtos;
+        List<Product> products = new ArrayList<>();
+        Product product = null;
+        if(productRepository.findByProductCategory(id) != null){
+
+            for(int i = 0; i < productRepository.findByProductCategory(id).size(); i++){
+                product = productRepository.findByProductCategory(id).get(i);
+                product.getProductCategory().setStore(null);
+                product.getProductCategory().setProducts(null);
+                products.add(product);
+
+            }
+
+
+            return products;
         }else{
             return null;
         }
@@ -38,7 +61,10 @@ public class ProductService {
 
     public Product findById(Long id){
         if(productRepository.findById(id).isPresent()){
-            return productRepository.findById(id).get();
+            Product product = productRepository.findById(id).get();
+            product.getProductCategory().setStore(null);
+            product.getProductCategory().setProducts(null);
+            return product;
         }else{
             return null;
         }

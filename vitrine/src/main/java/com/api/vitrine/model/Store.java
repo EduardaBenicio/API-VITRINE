@@ -1,10 +1,13 @@
 package com.api.vitrine.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 //ANNOTATION LOMBOK
@@ -18,6 +21,9 @@ import java.util.List;
 //ANNOTATION JPA
 @Entity
 @Table(name = "store")
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id")
 public class Store {
 
     @Id
@@ -41,9 +47,9 @@ public class Store {
     @Column(name = "logo")
     private String logo;
 
-    @JsonIgnore
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "store")
-    private List<ProductCategory> productCategories;
+    private List<ProductCategory> productCategories = new ArrayList<>();
 
     @ManyToOne
     @JoinColumn(name = "id_business_category")
@@ -53,7 +59,7 @@ public class Store {
     @JoinColumn(name = "id_store_owner")
     private StoreOwner storeOwner;
 
-    @OneToOne
-    @JoinColumn(name = "id_address_store", referencedColumnName = "id_address_store")
+    @Embedded
     public AddressStore addressStore;
+
 }

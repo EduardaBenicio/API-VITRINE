@@ -1,9 +1,12 @@
 package com.api.vitrine.model;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -17,6 +20,9 @@ import java.util.List;
 //ANNOTATION JPA
 @Entity
 @Table(name = "client")
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id")
 public class Client {
 
     @Id
@@ -52,18 +58,18 @@ public class Client {
     @JoinColumn(name = "id_user")
     public Usuario usuario;
 
-    @JsonIgnore
+
     @ManyToMany
     @JoinTable(name="favorites_products",
             joinColumns=@JoinColumn(name="id_client"),
             inverseJoinColumns = @JoinColumn(name = "id_product"))
-    private List<Product> favoritesProducts;
+    private List<Product> favoritesProducts = new ArrayList<>();
 
-    @JsonIgnore
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "client")
-    private List<AddressClient> addressClients;
 
-    @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "client")
-    private List<Request> requests;
+    private List<AddressClient> addressClients = new ArrayList<>();
+
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "client")
+    private List<Request> requests = new ArrayList<>();
 }
