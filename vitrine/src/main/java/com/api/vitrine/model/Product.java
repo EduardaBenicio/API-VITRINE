@@ -1,12 +1,11 @@
 package com.api.vitrine.model;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.fasterxml.jackson.annotation.*;
 import lombok.*;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 //ANNOTATION LOMBOK
@@ -20,9 +19,9 @@ import java.util.List;
 //ANNOTATION JPA
 @Entity
 @Table(name = "product")
-@JsonIdentityInfo(
-        generator = ObjectIdGenerators.PropertyGenerator.class,
-        property = "id")
+//@JsonIdentityInfo(
+       // generator = ObjectIdGenerators.PropertyGenerator.class,
+        //property = "id")
 public class Product {
 
     @Id
@@ -46,15 +45,15 @@ public class Product {
     @Column(name = "in_stock", nullable = false)
     private long inStock;
 
+
+    private long quantity;
+
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "id_product_category")
     private ProductCategory productCategory;
 
-    @JsonIgnore
-    @ManyToMany(mappedBy = "products")
-    private List<Request> request = new ArrayList<>();
-
-
+    @JsonManagedReference
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "product")
     private List<ProductPhotos> productPhotos = new ArrayList<>();
 
@@ -62,12 +61,15 @@ public class Product {
     @ManyToMany(mappedBy = "favoritesProducts")
     private List<Client> clients = new ArrayList<>();
 
+
     @JsonIgnore
     @ManyToMany(mappedBy = "cartProducts")
     private List<ShoppingCart> shoppingCarts = new ArrayList<>();
 
-
+    @JsonManagedReference
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "product")
     private List<Specifications> specifications =  new ArrayList<>();
+
+
 
 }

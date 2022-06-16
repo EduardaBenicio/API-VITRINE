@@ -2,6 +2,7 @@ package com.api.vitrine.model;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.*;
 
@@ -20,9 +21,9 @@ import java.util.List;
 //ANNOTATION JPA
 @Entity
 @Table(name = "client")
-@JsonIdentityInfo(
-        generator = ObjectIdGenerators.PropertyGenerator.class,
-        property = "id")
+//@JsonIdentityInfo(
+       // generator = ObjectIdGenerators.PropertyGenerator.class,
+        //property = "id")
 public class Client {
 
     @Id
@@ -51,6 +52,9 @@ public class Client {
     private String profilePicture;
 
     @NonNull
+    @Column(name = "email", unique = true, nullable = false)
+    private String email;
+    @NonNull
     @Column(name = "cpf", unique=true, nullable = false)
     private String cpf;
 
@@ -69,7 +73,7 @@ public class Client {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "client")
     private List<AddressClient> addressClients = new ArrayList<>();
 
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "client")
-    private List<Request> requests = new ArrayList<>();
+    @JsonIgnore
+    @OneToMany(mappedBy = "client", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<Request> requests;
 }

@@ -44,7 +44,12 @@ public class StoreController {
             return  ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         }
     }
+    //FIND BY ID
+    @GetMapping(path = "/request/{id}")
+    public ResponseEntity<List<Request>> findRequest(@PathVariable Long id){
 
+        return ResponseEntity.status(HttpStatus.OK).body(storeService.findAllRequests(id));
+    }
 
 
     //DELETE CLIENT

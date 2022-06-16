@@ -1,8 +1,6 @@
 package com.api.vitrine.model;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.fasterxml.jackson.annotation.*;
 import lombok.*;
 
 import javax.persistence.*;
@@ -20,9 +18,9 @@ import java.util.List;
 //ANNOTATION JPA
 @Entity
 @Table(name = "product_category")
-@JsonIdentityInfo(
-        generator = ObjectIdGenerators.PropertyGenerator.class,
-        property = "id")
+//@JsonIdentityInfo(
+       // generator = ObjectIdGenerators.PropertyGenerator.class,
+       // property = "id")
 public class ProductCategory {
 
     @Id
@@ -39,11 +37,12 @@ public class ProductCategory {
     private String categoryPhoto;
 
 
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "id_store")
     private Store store;
 
-
+    @JsonManagedReference
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "productCategory")
     private List<Product> products = new ArrayList<>();
 }

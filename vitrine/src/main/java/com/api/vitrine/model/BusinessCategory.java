@@ -23,9 +23,9 @@ import java.util.Set;
 
 @Entity
 @Table(name = "business_category")
-@JsonIdentityInfo(
-        generator = ObjectIdGenerators.PropertyGenerator.class,
-        property = "id")
+//@JsonIdentityInfo(
+        //generator = ObjectIdGenerators.PropertyGenerator.class,
+      //  property = "id")
 public class BusinessCategory {
 
     @Id
@@ -41,7 +41,7 @@ public class BusinessCategory {
     @Column(name = "category_photo")
     private String categoryPhoto;
 
-
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "businessCategory", fetch = FetchType.LAZY)
     private List<Store> stores = new ArrayList<>();
 }

@@ -1,12 +1,11 @@
 package com.api.vitrine.model;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.fasterxml.jackson.annotation.*;
 import lombok.*;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 //ANNOTATION LOMBOK
@@ -18,9 +17,9 @@ import java.util.List;
 //ANNOTATION JPA
 @Entity
 @Table(name = "request")
-@JsonIdentityInfo(
-        generator = ObjectIdGenerators.PropertyGenerator.class,
-        property = "id")
+//@JsonIdentityInfo(
+        //generator = ObjectIdGenerators.PropertyGenerator.class,
+       // property = "id")
 public class Request {
 
     @Id
@@ -40,13 +39,11 @@ public class Request {
     @Column(name = "total")
     private double total;
 
+    @JsonManagedReference
+    @OneToMany(mappedBy = "request", cascade = CascadeType.ALL)
+    private List<RequestProducts> requestProducts = new ArrayList<>();
 
-    @ManyToMany
-    @JoinTable(name="pedido_produtos",
-            joinColumns=@JoinColumn(name="id_request"),
-            inverseJoinColumns = @JoinColumn(name = "id_product"))
-    private List<Product> products = new ArrayList<>();
-
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "id_client")
     private Client client;

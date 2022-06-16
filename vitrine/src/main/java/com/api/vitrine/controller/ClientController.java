@@ -2,6 +2,7 @@ package com.api.vitrine.controller;
 
 import com.api.vitrine.model.BusinessCategory;
 import com.api.vitrine.model.Client;
+import com.api.vitrine.model.Request;
 import com.api.vitrine.services.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -45,6 +46,24 @@ public class ClientController {
         }
     }
 
+    //FIND BY ID
+    @GetMapping(path = "/login/{email}")
+    public ResponseEntity<Client> findByEmail(@PathVariable String email){
+
+        Client client = clientService.findByEmail(email);
+
+        if(client != null){
+            return ResponseEntity.status(HttpStatus.OK).body(client);
+        }else{
+            return  ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
+    }
+
+    @GetMapping(path = "/request/{id}")
+    public ResponseEntity<List<Request>> findRequest(@PathVariable Long id){
+
+        return ResponseEntity.status(HttpStatus.OK).body(clientService.findRequest(id));
+    }
 
 
     //DELETE CLIENT

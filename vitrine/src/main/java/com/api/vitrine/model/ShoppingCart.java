@@ -19,9 +19,9 @@ import java.util.List;
 //ANNOTATION JPA
 @Entity
 @Table(name = "shopping_cart")
-@JsonIdentityInfo(
-        generator = ObjectIdGenerators.PropertyGenerator.class,
-        property = "id")
+//@JsonIdentityInfo(
+       // generator = ObjectIdGenerators.PropertyGenerator.class,
+       // property = "id")
 public class ShoppingCart {
 
     @Id

@@ -6,38 +6,37 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.List;
-
 //ANNOTATION LOMBOK
 @Getter
 @Setter
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @RequiredArgsConstructor
 
-//ANNOTATION JPA
+// ANNOTATTION JPA
 @Entity
-@Table(name = "product_photos")
+@Table(name = "request_products")
 //@JsonIdentityInfo(
        // generator = ObjectIdGenerators.PropertyGenerator.class,
        // property = "id")
-public class ProductPhotos {
-
+public class RequestProducts {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_product_photos")
+    @Column(name = "id_request_products")
     private long id;
 
     @NonNull
-    @Column(name = "photo")
-    private String photo;
-
+    @Column(name = "quantity")
+    private int quantity;
 
     @JsonBackReference
     @ManyToOne
+    @JoinColumn(name = "id_request")
+    private Request request;
+
+    @ManyToOne
     @JoinColumn(name = "id_product")
     private Product product;
-
 
 
 }

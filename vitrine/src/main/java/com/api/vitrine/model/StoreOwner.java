@@ -2,6 +2,7 @@ package com.api.vitrine.model;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.*;
 
@@ -20,9 +21,9 @@ import java.util.List;
 //ANNOTATION JPA
 @Entity
 @Table(name = "store_owner")
-@JsonIdentityInfo(
-        generator = ObjectIdGenerators.PropertyGenerator.class,
-        property = "id")
+//@JsonIdentityInfo(
+       // generator = ObjectIdGenerators.PropertyGenerator.class,
+        //property = "id")
 public class StoreOwner {
 
     @Id
@@ -59,6 +60,7 @@ public class StoreOwner {
     private String cpf;
 
 
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "storeOwner")
     private List<Store> stores = new ArrayList<>();
 

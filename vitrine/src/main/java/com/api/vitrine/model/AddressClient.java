@@ -19,9 +19,9 @@ import javax.persistence.*;
 //ANNOTATION JPA
 @Entity
 @Table(name = "address_client")
-@JsonIdentityInfo(
-        generator = ObjectIdGenerators.PropertyGenerator.class,
-        property = "id")
+//@JsonIdentityInfo(
+       // generator = ObjectIdGenerators.PropertyGenerator.class,
+        //property = "id")
 public class AddressClient {
 
     @Id

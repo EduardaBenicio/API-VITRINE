@@ -1,5 +1,6 @@
 package com.api.vitrine.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.*;
@@ -28,6 +29,7 @@ public class Specifications {
     private long id;
 
     //CHAVE ESTRANGEIRA
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "id_product")
     private Product product;
