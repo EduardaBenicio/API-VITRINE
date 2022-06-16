@@ -36,7 +36,7 @@ public class StoreOwner {
     private String name;
 
     //@NonNull
-    @Column(name = "email_owner", nullable = false)
+    @Column(name = "email_owner", nullable = false, unique = true)
     private String email;
 
     //@NonNull

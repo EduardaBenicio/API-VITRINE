@@ -1,5 +1,6 @@
 package com.api.vitrine.controller;
 
+import com.api.vitrine.model.Client;
 import com.api.vitrine.model.Store;
 import com.api.vitrine.model.StoreOwner;
 import com.api.vitrine.services.StoreOwnerService;
@@ -44,7 +45,17 @@ public class StoreOwnerController {
         }
     }
 
+    @GetMapping(path = "/login/{email}")
+    public ResponseEntity<StoreOwner> findByEmail(@PathVariable String email){
 
+        StoreOwner storeOwner = ownerService.findByEmail(email);
+
+        if(storeOwner != null){
+            return ResponseEntity.status(HttpStatus.OK).body(storeOwner);
+        }else{
+            return  ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
+    }
     //FIND BY ID
     @GetMapping(path = "/stores/{id}")
     public ResponseEntity<List<Store>> findStores(@PathVariable Long id){

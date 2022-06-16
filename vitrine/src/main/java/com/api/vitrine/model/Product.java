@@ -48,7 +48,7 @@ public class Product {
 
     private long quantity;
 
-    @JsonBackReference
+
     @ManyToOne
     @JoinColumn(name = "id_product_category")
     private ProductCategory productCategory;

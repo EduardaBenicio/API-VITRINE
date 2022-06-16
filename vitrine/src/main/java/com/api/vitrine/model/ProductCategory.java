@@ -42,7 +42,7 @@ public class ProductCategory {
     @JoinColumn(name = "id_store")
     private Store store;
 
-    @JsonManagedReference
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "productCategory")
     private List<Product> products = new ArrayList<>();
 }

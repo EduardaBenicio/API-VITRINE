@@ -1,5 +1,6 @@
 package com.api.vitrine.services;
 
+import com.api.vitrine.model.Client;
 import com.api.vitrine.model.Specifications;
 import com.api.vitrine.model.Store;
 import com.api.vitrine.model.StoreOwner;
@@ -35,6 +36,14 @@ public class StoreOwnerService {
 
         if(lista != null){
             return lista;
+        }else{
+            return null;
+        }
+    }
+
+    public StoreOwner findByEmail(String email){
+        if(storeOwnerRepository.findOwnerByEmail(email) != null){
+            return storeOwnerRepository.findOwnerByEmail(email);
         }else{
             return null;
         }
