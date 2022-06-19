@@ -24,8 +24,8 @@ public class AddressStore {
     private String street;
 
     //@NonNull
-    @Column(name = "district")
-    private String district;
+    @Column(name = "neighborhood")
+    private String neighborhood;
 
     //@NonNull
     @Column(name = "cep")
@@ -39,9 +39,11 @@ public class AddressStore {
     @Column(name = "complement")
     private String complement;
 
+    @NonNull
+    @Column(name = "city")
+    private String city;
+
     //@NonNull
     @Column(name = "uf")
     private String uf;
-
-
 }
