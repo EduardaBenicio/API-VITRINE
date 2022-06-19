@@ -44,6 +44,9 @@ public class Store {
     @Column(name = "logo")
     private String logo;
 
+    @NonNull
+    @Column(name = "phone")
+    private String phone;
 
     @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "store")
