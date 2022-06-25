@@ -32,7 +32,7 @@ public class StoreOwnerService {
 
     public List<Store> findAllStore(long id){
 
-        List<Store> lista = storeRepository.findStore(id);
+        List<Store> lista = storeRepository.findByOwner(id);
 
         if(lista != null){
             return lista;

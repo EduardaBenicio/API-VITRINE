@@ -60,7 +60,7 @@ public class StoreOwner {
     private String cpf;
 
 
-    @JsonIgnore
+    @JsonManagedReference
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "storeOwner")
     private List<Store> stores = new ArrayList<>();
 

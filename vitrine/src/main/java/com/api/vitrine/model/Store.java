@@ -57,6 +57,7 @@ public class Store {
     @JoinColumn(name = "id_business_category")
     private BusinessCategory businessCategory;
 
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "id_store_owner")
     private StoreOwner storeOwner;
