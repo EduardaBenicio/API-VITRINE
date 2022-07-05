@@ -46,7 +46,6 @@ public class BusinessCategoryController {
             return  ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         }
     }
-
     //FIND BY ID
     @GetMapping(path = "/stores/{id}")
     public ResponseEntity<List<Store>> findStores(@PathVariable Long id){
@@ -59,7 +58,6 @@ public class BusinessCategoryController {
             return  ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         }
     }
-
     @PutMapping(path = "/update")
     public ResponseEntity<BusinessCategory> update(@RequestBody BusinessCategory businessCategory){
 

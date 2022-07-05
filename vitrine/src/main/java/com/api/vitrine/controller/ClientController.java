@@ -26,13 +26,11 @@ public class ClientController {
     public ResponseEntity<List<Client>> listAll(){
         return ResponseEntity.status(HttpStatus.OK).body(clientService.findAll());
     }
-
     @PostMapping(path = "/save")
     public ResponseEntity<Client> save(@RequestBody Client client){
 
         return ResponseEntity.status(HttpStatus.CREATED).body(clientService.save(client));
     }
-
     //FIND BY ID
     @GetMapping(path = "/{id}")
     public ResponseEntity<Client> findById(@PathVariable Long id){
@@ -45,7 +43,6 @@ public class ClientController {
             return  ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         }
     }
-
     //FIND BY ID
     @GetMapping(path = "/login/{email}")
     public ResponseEntity<Client> findByEmail(@PathVariable String email){
@@ -58,14 +55,11 @@ public class ClientController {
             return  ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         }
     }
-
     @GetMapping(path = "/request/{id}")
     public ResponseEntity<List<Request>> findRequest(@PathVariable Long id){
 
         return ResponseEntity.status(HttpStatus.OK).body(clientService.findRequest(id));
     }
-
-
     //DELETE CLIENT
     @DeleteMapping(path = "/delete/{id}")
     public ResponseEntity<?> delete(@PathVariable  Long id){

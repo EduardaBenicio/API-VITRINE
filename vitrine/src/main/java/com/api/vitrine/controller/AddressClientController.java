@@ -43,9 +43,6 @@ public class AddressClientController {
             return  ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         }
     }
-
-
-
     //DELETE CLIENT
     @DeleteMapping(path = "/delete/{id}")
     public ResponseEntity<?> delete(@PathVariable  Long id){
