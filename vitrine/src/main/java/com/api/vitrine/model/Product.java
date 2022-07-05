@@ -34,8 +34,8 @@ public class Product {
     private String name;
 
     @NonNull
-    @Column(name = "cost", nullable = false)
-    private double cost;
+    @Column(name = "price", nullable = false)
+    private double price;
 
     @NonNull
     @Column(name = "description")
