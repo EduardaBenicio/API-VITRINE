@@ -13,8 +13,8 @@ import java.util.List;
 @Repository
 public interface StoreOwnerRepository extends JpaRepository<StoreOwner, Long> {
 
-    @Query(value = "SELECT * FROM store_owner WHERE email_owner = ?1", nativeQuery = true)
-    public StoreOwner findOwnerByEmail(String email);
+    @Query(value = "SELECT * FROM store_owner WHERE id_user = ?1", nativeQuery = true)
+    public StoreOwner findOwnerByUser(long id);
 
 
 }

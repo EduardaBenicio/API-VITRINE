@@ -1,11 +1,9 @@
 package com.api.vitrine.services;
 
-import com.api.vitrine.model.Client;
-import com.api.vitrine.model.Specifications;
-import com.api.vitrine.model.Store;
-import com.api.vitrine.model.StoreOwner;
+import com.api.vitrine.model.*;
 import com.api.vitrine.repository.StoreOwnerRepository;
 import com.api.vitrine.repository.StoreRepository;
+import com.api.vitrine.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,7 +14,8 @@ public class StoreOwnerService {
 
     @Autowired
     StoreOwnerRepository storeOwnerRepository;
-
+    @Autowired
+    UserRepository userRepository;
     @Autowired
     StoreRepository storeRepository;
 
@@ -27,6 +26,9 @@ public class StoreOwnerService {
 
     public StoreOwner save(StoreOwner storeOwner){
 
+        if(storeOwner.usuario.getUsername() != null){
+            Usuario user = userRepository.save(storeOwner.usuario);
+        }
         return storeOwnerRepository.save(storeOwner);
     }
 
@@ -41,13 +43,7 @@ public class StoreOwnerService {
         }
     }
 
-    public StoreOwner findByEmail(String email){
-        if(storeOwnerRepository.findOwnerByEmail(email) != null){
-            return storeOwnerRepository.findOwnerByEmail(email);
-        }else{
-            return null;
-        }
-    }
+
     public StoreOwner update(StoreOwner storeOwner){
 
         return storeOwnerRepository.save(storeOwner);

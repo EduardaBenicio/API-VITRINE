@@ -1,6 +1,8 @@
 package com.api.vitrine.services;
 
+import com.api.vitrine.model.StoreOwner;
 import com.api.vitrine.model.Usuario;
+import com.api.vitrine.repository.StoreOwnerRepository;
 import com.api.vitrine.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -16,6 +18,8 @@ public class UserService implements UserDetailsService {
 
     @Autowired
     UserRepository userRepository;
+    @Autowired
+    StoreOwnerRepository ownerRepository;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -39,6 +43,15 @@ public class UserService implements UserDetailsService {
     public Usuario findById(Long id){
         if(userRepository.findById(id).isPresent()){
             return userRepository.findById(id).get();
+        }else{
+            return null;
+        }
+    }
+
+    public StoreOwner login(String user, String password){
+        if(userRepository.login(user, password) != null){
+            Usuario usuario = userRepository.login(user, password);
+            return ownerRepository.findOwnerByUser(usuario.getId());
         }else{
             return null;
         }

@@ -11,6 +11,6 @@ public interface UserRepository extends JpaRepository<Usuario, Long> {
     @Query(value = "SELECT * FROM usuarios WHERE username = ?1", nativeQuery = true)
     Usuario findByUsername (String username);
 
-    @Query(value = "SELECT * FROM usuarios WHERE username = ?1 AND password =  ?2 LIMIT 1", nativeQuery = true)
-    Usuario Login (String username, String passoword);
+    @Query(value = "SELECT * FROM usuario WHERE username = ?1 AND password =  ?2 LIMIT 1", nativeQuery = true)
+    Usuario login (String username, String passoword);
 }

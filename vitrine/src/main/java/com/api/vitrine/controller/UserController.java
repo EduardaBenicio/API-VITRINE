@@ -1,5 +1,6 @@
 package com.api.vitrine.controller;
 
+import com.api.vitrine.model.StoreOwner;
 import com.api.vitrine.model.Usuario;
 import com.api.vitrine.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,7 +45,17 @@ public class UserController {
         }
     }
 
+    @GetMapping(path = "/login/{user}/{pass}")
+    public ResponseEntity<StoreOwner> login(@PathVariable  String user, @PathVariable  String pass){
 
+        StoreOwner owner = userService.login(user, pass);
+
+        if(owner != null){
+            return ResponseEntity.status(HttpStatus.OK).body(owner);
+        }else{
+            return  ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
+    }
 
     //DELETE CLIENT
     @DeleteMapping(path = "/delete/{id}")

@@ -45,6 +45,10 @@ public class Usuario implements UserDetails{
                 .collect(Collectors.toList());
     }
 
+    public long getId(){
+        return this.id;
+    }
+
     @Override
     public String getPassword() {
         return this.password;
